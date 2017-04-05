@@ -14,10 +14,6 @@ public class LambdaScheduler {
 		jobList=job;
 		resultantList=new ArrayList<Jobs>();
 	}
-	
-	public void add(Jobs job){
-		jobList.add(job);
-	}
 
 	public List<Jobs> getJobList() {
 		return jobList;
@@ -45,7 +41,7 @@ public class LambdaScheduler {
 		for(int i=0;i<jobList.size();i++){
 			int j=0;
 			resultantList.add(jobList.get(i));
-			for(int j=i+1;j<jobList.size();j++){
+			for( j=i+1;j<jobList.size();j++){
 				if(jobList.get(i).getEndTime()<=jobList.get(j).getStartTime()){
 					resultantList.add(jobList.get(j));
 					break;
