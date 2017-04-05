@@ -43,14 +43,15 @@ public class LambdaScheduler {
 		}
 		
 		for(int i=0;i<jobList.size();i++){
+			int j=0;
 			resultantList.add(jobList.get(i));
 			for(int j=i+1;j<jobList.size();j++){
 				if(jobList.get(i).getEndTime()<=jobList.get(j).getStartTime()){
 					resultantList.add(jobList.get(j));
 					break;
 				}
-			i=j;
 			}
+			i=j+1;
 		}
 		
 		return resultantList;

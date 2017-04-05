@@ -27,10 +27,14 @@ public class LambdaWeightedScheduler {
 			 }
 		LambdaScheduler object=new LambdaScheduler(jobList);
 		object.sortJoblist();//sort the list by end time of the jobs
+		for(int i=0;i<jobList.size();i++){
+			System.out.println(jobList.get(i).getStartTime()+","+jobList.get(i).getEndTime());
+		}
 		double weightTable[]=new double[jobList.size()];// calculating profits at each job
-		for(int i=0;i<=jobList.size();i++){
+		//weightTable[0]=jobList.get(0).getWeight();
+		for(int i=0;i<jobList.size();i++){
 			double weightIncludingCurrent = jobList.get(i).getWeight();
-	        int l = compatibleJobs(i);
+	        int l = compatibleJob(i+1);
 	        if (l != -1){
 	        	weightIncludingCurrent += weightTable[l];
 	        }
@@ -46,9 +50,9 @@ public class LambdaWeightedScheduler {
 		return resultantList;
 	}
 	
-	public int compatibleJobs(int i){
-		for (int j=i-1;j>=0;j--){
-			if(jobList.get(j).getEndTime()<=jobList.get(i-1).getStartTime()){
+	public int compatibleJob(int i){
+		for (int j=i+1;j<=jobList.size();j++){
+			if(jobList.get(i).getEndTime()>=jobList.get(j).getStartTime()){
 				return j;
 			}
 		}
